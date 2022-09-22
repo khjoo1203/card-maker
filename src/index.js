@@ -5,6 +5,7 @@ import App from './App';
 import { firebaseApp } from './service/firebase';
 import AuthService from './service/auth_service';
 import CardRepository from './service/card_repository';
+import ImageFileInput from './image_file_input/ImageFileInput';
 
 const authService = new AuthService(firebaseApp);
 const cardRepository = new CardRepository(firebaseApp);
