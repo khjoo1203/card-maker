@@ -1,13 +1,12 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
+import React, { memo } from 'react';
+import ReactDOM from 'react-dom';
 import './index.module.css';
 import App from './App';
-import firebaseApp from './service/firebase';
 import AuthService from './service/auth_service';
-import CardRepository from './service/card_repository';
-import ImageFileInput from './image_file_input/ImageFileInput';
 import ImageUploader from './service/image_uploader';
-import { memo } from "react";
+import ImageFileInput from './components/image_file_input/ImageFileInput';
+import CardRepository from './service/card_repository';
+import { firebaseApp } from './service/firebase';
 
 const authService = new AuthService(firebaseApp);
 const cardRepository = new CardRepository(firebaseApp);
@@ -16,9 +15,13 @@ const FileInput = memo((props) => (
   <ImageFileInput {...props} imageUploader={imageUploader} />
 ));
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
+ReactDOM.render(
   <React.StrictMode>
-    <App authService={authService} FileInput={FileInput} />
-  </React.StrictMode>
+    <App
+      authService={authService}
+      FileInput={FileInput}
+      cardRepository={cardRepository}
+    />
+  </React.StrictMode>,
+  document.getElementById('root')
 );
